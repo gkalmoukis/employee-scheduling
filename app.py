@@ -1,5 +1,5 @@
 import bottle
-import schedule
+import endpoints
 
 app = application = bottle.default_app()
 

@@ -1,5 +1,19 @@
 import bottle
-import endpoints
+
+from bottle import  get, put, delete
+
+import sys
+
+
+
+
+sys.path.insert(0, '/home/user/repository/employee-scheduling/endpoints')
+
+import create_employee  
+import delete_employee  
+import read_all_employees  
+import read_employee  
+import update_employee_contract
 
 app = application = bottle.default_app()
 

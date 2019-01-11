@@ -1,12 +1,12 @@
 from __future__ import print_function
-from ortools.sat.python import cp_model
+
 from bottle import request, response
 from bottle import post
 import json
 import re
 
 from db import *
-import scheduler
+from scheduler import solve_shift_scheduling
 
 @post('/schedule')
 def create_schedule():

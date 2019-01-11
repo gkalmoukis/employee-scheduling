@@ -1,3 +1,6 @@
+from ortools.sat.python import cp_model
+import json
+
 def negated_bounded_span(works, start, length):
     sequence = []
     # Left border (start of works, or works[start - 1])
@@ -88,7 +91,6 @@ def add_soft_sum_constraint(model, works, hard_min, soft_min, min_cost,
 
 
 def solve_shift_scheduling(id_list,weeks):
-    
     # Data
     employees = id_list   
     num_employees = len(employees) 
@@ -276,6 +278,6 @@ def solve_shift_scheduling(id_list,weeks):
         json_str = '[%s]' % (str1[:-1])       
         # TODO: Add penalties to json.      
         return json_str
-    
+
     if status == cp_model.INFEASIBLE:
         return json.dumps({"message":"INFEASIBLE"})

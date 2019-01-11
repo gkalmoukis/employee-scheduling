@@ -5,8 +5,8 @@ import re
 from db import * 
 from passlib.hash import pbkdf2_sha256
 
-@post('/employee')
-def create_employee():
+@post('/create_employee')
+def create_document():
     ret_message = ""
     val_errors = []    
     try:
@@ -23,7 +23,7 @@ def create_employee():
         # todo: overflow check
 
         # extract and validate name
-        keys= {'name' : '[a-zA-Z0-9]+' , 
+        keys = {'name' : '[a-zA-Z0-9]+' , 
                 'email':'[^@]+@[^@]+\.[^@]+', 
                 'password' : '[A-Za-z0-9@#$%^&+=]{8,}', 
                 'role':'^[-+]?[0-9]+$'
@@ -34,7 +34,7 @@ def create_employee():
                 val_errors.append("in "+key)
                 
         if len(val_errors) != 0:
-            ret_message = "validate error(s)"
+            ret_message = "body error(s)"
             raise ValueError
 
         # for key, val in data.items():

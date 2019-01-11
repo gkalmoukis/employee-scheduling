@@ -1,19 +1,16 @@
+import sys
 import bottle
-
 from bottle import  get, put, delete
 
-import sys
-
-
-
-
-sys.path.insert(0, '/home/user/repository/employee-scheduling/endpoints')
+sys.path.insert(0, './endpoints')
+sys.path.insert(0, './controllers')
 
 import create_employee  
 import delete_employee  
 import read_all_employees  
 import read_employee  
 import update_employee_contract
+import create_schedule
 
 app = application = bottle.default_app()
 

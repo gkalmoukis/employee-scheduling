@@ -264,18 +264,33 @@ def solve_shift_scheduling(id_list,weeks):
     status = solver.SolveWithSolutionCallback(model, solution_printer)
     
     # Print solution.
+    # if status == cp_model.OPTIMAL: 
+    #     print('Status: %s' % ("OPTIMAL"))       
+    #     str1 = ''
+    #     for e in range(num_employees):
+    #         str2 = ''
+    #         for d in range(num_days):
+    #             for s in range(num_shifts):
+    #                 if solver.BooleanValue(work[e, s, d]):
+    #                     str2 += '{"day":"%s", "shift":"%s"},' % (str(d),shifts[s])
+    #         str2 = '[%s]' % str2[:-1]
+    #         str1 += '{"employee":"%s","shifts":%s},' % (employees[e],str2)         
+    #     json_str = '[%s]' % (str1[:-1])       
+    #     # TODO: Add penalties to json.      
+    #     return json_str
+
     if status == cp_model.OPTIMAL: 
         print('Status: %s' % ("OPTIMAL"))       
         str1 = ''
-        for e in range(num_employees):
+        for d in range(num_days):
             str2 = ''
-            for d in range(num_days):
-                for s in range(num_shifts):
+            for s in range(num_shifts):
+                for e in range(num_employees):
                     if solver.BooleanValue(work[e, s, d]):
-                        str2 += '{"day":"%s", "shift":"%s"},' % (str(d),shifts[s])
-            str2 = '[%s]' % str2[:-1]
-            str1 += '{"employee":"%s","shifts":%s},' % (employees[e],str2)         
-        json_str = '[%s]' % (str1[:-1])       
+                        str2 += '"%s",' % (employees[e])
+            str2 = '[%s]' % (str2[:-1])
+            str1 += '{"day":"%s","shifts":%s},' % (d, str2)
+        json_str = '[%s]' % (str1[:-1]) 
         # TODO: Add penalties to json.      
         return json_str
 
